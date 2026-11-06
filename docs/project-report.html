@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Red Flag Radar — Project Report</title>
+  <style>
+    :root { color-scheme: light; --ink:#172333; --muted:#536273; --red:#a52f43; --red-dark:#681b2a; --pale:#f7edf0; --line:#d8dfe6; --paper:#fff; --soft:#f4f6f8; }
+    * { box-sizing: border-box; }
+    html { font: 10pt/1.48 "Segoe UI", Arial, sans-serif; color:var(--ink); background:#eef1f4; }
+    body { margin:0; }
+    .page { max-width:210mm; margin:18px auto; padding:18mm 17mm 16mm; background:var(--paper); box-shadow:0 8px 30px #18263818; }
+    h1,h2,h3 { line-height:1.18; margin:0; color:var(--ink); }
+    h1 { font-size:33pt; letter-spacing:-1.3pt; }
+    h2 { margin:18px 0 8px; padding-bottom:5px; border-bottom:1px solid var(--line); font-size:18pt; letter-spacing:-.35pt; }
+    h3 { margin:12px 0 5px; font-size:11.5pt; }
+    p { margin:5px 0 9px; }
+    ul,ol { margin:5px 0 10px; padding-left:20px; }
+    li { margin:3px 0; }
+    .cover { min-height:245mm; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(145deg,#fff 35%,#fbf2f4 100%); }
+    .brand { color:var(--red); font-size:10pt; font-weight:800; letter-spacing:2.2pt; text-transform:uppercase; }
+    .cover-title { margin-top:56mm; }
+    .cover h1 span { color:var(--red); }
+    .tagline { margin-top:13px; color:var(--muted); font-size:15pt; }
+    .cover-rule { width:65px; height:4px; margin:20px 0; background:var(--red); }
+    .cover-subtitle { max-width:135mm; color:#344456; font-size:12pt; }
+    .cover-meta { border-top:1px solid #d7c3c8; padding-top:11px; color:var(--muted); font-size:9pt; }
+    .eyebrow { color:var(--red); font-size:8pt; font-weight:750; letter-spacing:1.15pt; text-transform:uppercase; }
+    .lead { color:#344456; font-size:12pt; }
+    .callout { margin:12px 0; padding:10px 12px; border-left:4px solid var(--red); background:var(--pale); }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:10px 0; }
+    .card { padding:10px 11px; border:1px solid var(--line); border-radius:6px; background:#fff; break-inside:avoid; }
+    .card h3 { margin-top:0; color:var(--red-dark); }
+    .diagram { display:flex; align-items:stretch; gap:7px; margin:14px 0; }
+    .node { flex:1; padding:12px 8px; border:1px solid #d8a8b2; border-radius:7px; background:#fbf2f4; text-align:center; }
+    .node b { display:block; color:var(--red-dark); }
+    .arrow { align-self:center; color:var(--red); font-size:18pt; font-weight:700; }
+    table { width:100%; margin:8px 0 12px; border-collapse:collapse; font-size:9pt; }
+    th { background:#f4e7ea; color:#54202c; text-align:left; }
+    th,td { padding:6px 7px; border:1px solid var(--line); vertical-align:top; }
+    tr { break-inside:avoid; }
+    code,pre { font:8.6pt/1.45 Consolas,"Courier New",monospace; }
+    pre { margin:7px 0 10px; padding:10px 12px; border:1px solid var(--line); border-radius:5px; background:#f5f7f9; white-space:pre-wrap; }
+    .pill { display:inline-block; margin:2px 3px 2px 0; padding:3px 7px; border-radius:20px; background:#f6e8eb; color:#76283a; font-size:8pt; }
+    .small { color:var(--muted); font-size:8.7pt; }
+    .strong { color:var(--red-dark); font-weight:700; }
+    .page-break { break-before:page; }
+    .footnote { margin-top:18px; padding-top:7px; border-top:1px solid var(--line); color:var(--muted); font-size:8pt; }
+    @page { size:A4; margin:0; }
+    @media print {
+      html { background:white; }
+      .page { width:210mm; max-width:none; min-height:297mm; margin:0; padding:17mm 17mm 15mm; box-shadow:none; }
+      .cover { min-height:297mm; }
+      * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="brand">Red Flag Radar</div>
+    <div class="cover-title">
+      <div class="eyebrow">Full project overview</div>
+      <h1>Pause.<br><span>Look closer.</span></h1>
+      <div class="cover-rule"></div>
+      <p class="tagline">Spot the Signs. Stop the Scams.</p>
+      <p class="cover-subtitle">A practical guide to the product idea, user experience, system architecture, detection logic, privacy boundaries, implementation, and future direction.</p>
+    </div>
+    <div class="cover-meta"><b>Project report</b><br>Technical and non-technical overview · 12 October 2026<br>Prepared from the current Red Flag Radar codebase</div>
+  </section>
+
+  <section class="page page-break">
+    <div class="eyebrow">01 · At a glance</div>
+    <h2>Executive summary</h2>
+    <p class="lead">Red Flag Radar is a local-first web application that helps a person examine suspicious messages, a sequence of messages, or the visible text of a URL. It explains which wording or sequence triggered a rule, suggests independent checks, and offers a context-aware next move.</p>
+    <div class="callout"><b>Its central promise:</b> replace a bare “safe/scam” label with evidence, context, and a practical action. Its score is a heuristic signal, never a probability or proof.</div>
+    <div class="grid">
+      <div class="card"><h3>Who it helps</h3><p>Students reviewing internship and scholarship offers, people receiving unexpected payment or account messages, and anyone who wants to pause and check a link or conversation.</p></div>
+      <div class="card"><h3>What it does</h3><p>Flags a small set of explainable warning signs, preserves conversation order, displays a verification plan, and proposes an optional safe response.</p></div>
+      <div class="card"><h3>What it avoids</h3><p>It does not open submitted URLs, contact third-party AI services, authenticate a sender, or save analysis submissions in a database.</p></div>
+      <div class="card"><h3>Project status</h3><p>Three working services: React/Vite UI, Java Spring Boot API, and Python FastAPI detector. Tests and local browser flows have been run; this remains a prototype.</p></div>
+    </div>
+    <h3>Product idea in one sentence</h3>
+    <p>Help people slow down, understand why a message deserves scrutiny, and verify important claims through a source they find independently.</p>
+    <h3>How to read this report</h3>
+    <p>The first half explains the user need and the product experience. The middle describes the architecture, data contract, and rule engine. The final sections cover privacy, setup, quality checks, limitations, and a sensible roadmap.</p>
+
+    <div class="eyebrow" style="margin-top:22px">02 · The problem</div>
+    <h2>Why this project exists</h2>
+    <p>Fraudulent messages can mix ordinary details with a sudden request: pay a fee, share an access code, act before a deadline, or follow a supplied link. A single sentence may be ambiguous. A conversation’s progression can be more revealing than one line considered alone.</p>
+    <p>Many basic tools return a label without explaining it. That can encourage overconfidence: a “low risk” result may be mistaken for a safety guarantee. Red Flag Radar instead shows the evidence and frames the score as one imperfect signal.</p>
+    <h3>Design goals</h3>
+    <ul>
+      <li><b>Explainable:</b> make each rule and its reason visible.</li>
+      <li><b>Context-aware:</b> keep conversation order and identify selected sequences such as a fee after an offer.</li>
+      <li><b>Actionable:</b> translate findings into independent verification steps and optional cautious wording.</li>
+      <li><b>Privacy-minded:</b> analyze locally and avoid storing submitted text by default.</li>
+      <li><b>Careful:</b> do not claim a sender, organization, or website has been verified.</li>
+    </ul>
+    <h3>Typical users and situations</h3>
+    <table><thead><tr><th>User</th><th>Situation</th><th>Helpful result</th></tr></thead><tbody>
+      <tr><td>Student or job seeker</td><td>An internship offer asks for a registration fee.</td><td>Payment evidence, conversation context, and a suggestion to check the employer’s official listing.</td></tr>
+      <tr><td>Message recipient</td><td>A sender requests an OTP or bank details under time pressure.</td><td>Credential warning and a copyable reply that avoids sharing sensitive information.</td></tr>
+      <tr><td>Careful link reviewer</td><td>A message includes an unusual or plain-HTTP URL.</td><td>Visible URL-shape signals and advice to navigate independently instead of opening the link.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="page page-break">
+    <div class="eyebrow">03 · Product experience</div>
+    <h2>What the user can do</h2>
+    <div class="grid">
+      <div class="card"><h3>1. Review one message</h3><p>Paste an offer or message. The result shows the heuristic score, risk band, highlighted wording, evidence explanations, recommendations, and checks.</p></div>
+      <div class="card"><h3>2. Review a conversation</h3><p>Paste messages one per line. The detector keeps their order, shows a per-message timeline, and looks for selected patterns such as payment after selection or later time pressure.</p></div>
+      <div class="card"><h3>3. Review URL text</h3><p>Submit an absolute HTTP or HTTPS URL. The service examines its scheme and host text; it never requests the destination.</p></div>
+      <div class="card"><h3>4. Verify independently</h3><p>Use the interactive checklist as personal progress. Its completion is not transmitted as evidence and does not prove an offer is legitimate.</p></div>
+    </div>
+    <h3>Distinctive feature — Next Move Coach</h3>
+    <p>After an analysis, the coach uses the returned evidence codes to present a concise optional next step. Payment findings prompt a pause-and-verify response; credential findings discourage sharing passwords, one-time codes, and financial information; urgency findings give the person room to check the deadline. The user can copy the suggested text and edit it.</p>
+    <p>For URL reviews, the coach changes from a reply template to an action: do not open the link from the message; type a known organization address independently. It explicitly says that replying is optional and the suggestion cannot verify the sender.</p>
+    <h3>User journey</h3>
+    <ol>
+      <li>Choose message, conversation, or URL review.</li>
+      <li>Enter text and submit it to the local Java API.</li>
+      <li>See the score, plain-language summary, evidence, and (for a conversation) timeline and patterns.</li>
+      <li>Read an optional next move, copy it if useful, and consult the verification checklist.</li>
+      <li>Independently confirm important claims before paying, sharing data, or acting.</li>
+    </ol>
+    <h3>Interface states</h3>
+    <p>Empty inputs keep the analyze control disabled. An unsupported URL scheme displays an inline validation message. During a request, the button is disabled and a loading status is shown. The result view includes a reset action, and checklist progress updates as the user checks items.</p>
+    <div class="callout"><b>Non-technical value:</b> the product is designed to reduce rushed decisions and show a user what to verify next, rather than ask them to trust an opaque automated verdict.</div>
+  </section>
+
+  <section class="page page-break">
+    <div class="eyebrow">04 · System design</div>
+    <h2>Architecture and request flow</h2>
+    <div class="diagram">
+      <div class="node"><b>React + Vite</b>User interface<br><span class="small">localhost:5173</span></div><div class="arrow">→</div>
+      <div class="node"><b>Spring Boot</b>Public API<br><span class="small">localhost:8080</span></div><div class="arrow">→</div>
+      <div class="node"><b>FastAPI</b>Rule engine<br><span class="small">localhost:8000</span></div>
+    </div>
+    <ol>
+      <li>The React interface checks basic input constraints and sends JSON to Java.</li>
+      <li>Spring validates the request DTO and forwards it to the configured detection-service URL.</li>
+      <li>FastAPI validates and normalizes the payload, then calls the pure Python analysis functions.</li>
+      <li>The detector returns structured findings and recommendations; Java validates the response shape and returns it to the browser.</li>
+      <li>The interface renders evidence, conversation context, coach guidance, and local checklist progress.</li>
+    </ol>
+    <h3>Technology stack</h3>
+    <table><thead><tr><th>Layer</th><th>Technology</th><th>Role</th></tr></thead><tbody>
+      <tr><td>Web UI</td><td>React 19, Vite 8, JavaScript, CSS</td><td>Input modes, results, timeline, safe-response coach, checklist.</td></tr>
+      <tr><td>Public API</td><td>Java 17, Spring Boot 3.5, Jakarta Validation</td><td>Request validation, CORS policy, error mapping, Python service client.</td></tr>
+      <tr><td>Detection API</td><td>Python 3.14 verified, FastAPI, Pydantic, Uvicorn</td><td>HTTP validation and typed JSON response around pure analysis logic.</td></tr>
+      <tr><td>Tests</td><td>Python unittest, Spring Boot Test / JUnit / MockMvc</td><td>Rule, API, validation, forwarding, and error-path checks.</td></tr>
+    </tbody></table>
+    <h3>Component responsibilities</h3>
+    <ul>
+      <li><b>frontend/src/App.jsx:</b> mode selection, form state, request lifecycle, client-side validation, result state.</li>
+      <li><b>ResultsPanel.jsx:</b> score, timeline, patterns, highlighted evidence, and next steps.</li>
+      <li><b>NextMoveCoach.jsx:</b> maps evidence codes to optional response/action text and copies it via the Clipboard API.</li>
+      <li><b>backend ApiController / DTOs:</b> REST route, field validation, typed responses.</li>
+      <li><b>PythonAnalysisService:</b> configurable Java-to-Python HTTP client and upstream error handling.</li>
+      <li><b>detection-service/app/engine.py:</b> dispatch, conversation chronology, URL parsing, checklists, and response construction.</li>
+      <li><b>rules.py / scoring.py:</b> isolated phrase rules, weighted evidence, risk bands.</li>
+    </ul>
+    <h3>Configuration and local ports</h3>
+    <table><thead><tr><th>Setting</th><th>Default / example</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>DETECTION_SERVICE_URL</code></td><td><code>http://127.0.0.1:8000</code></td><td>Python base URL used by Java.</td></tr>
+      <tr><td><code>FRONTEND_ORIGIN</code></td><td><code>http://localhost:5173</code></td><td>Permitted browser origin in Java CORS configuration.</td></tr>
+      <tr><td><code>VITE_API_BASE_URL</code></td><td><code>http://localhost:8080</code></td><td>Optional frontend Java API base URL.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="page page-break">
+    <div class="eyebrow">05 · Detection method</div>
+    <h2>How the rule engine works</h2>
+    <p>The current service is intentionally deterministic and rule-based. It does not call a hosted language model, use a trained classifier, browse the web, or check a reputation database. Matching and scoring are visible in source code and tests.</p>
+    <h3>Message indicators</h3>
+    <table><thead><tr><th>Indicator</th><th>Illustrative trigger</th><th>Weight</th></tr></thead><tbody>
+      <tr><td>Payment request</td><td>Pay, payment, fee, deposit, wire, transfer, send money</td><td>25</td></tr>
+      <tr><td>Sensitive information</td><td>Credential or financial term near a request to send/share/provide it</td><td>35</td></tr>
+      <tr><td>Urgency</td><td>Immediately, today, right now, final notice, short deadline</td><td>12</td></tr>
+      <tr><td>Pressure or threat</td><td>Cancellation, loss, legal action, termination threat</td><td>12</td></tr>
+      <tr><td>Unusually attractive claim</td><td>Guaranteed, easy money, no experience required</td><td>10</td></tr>
+    </tbody></table>
+    <h3>Conversation patterns</h3>
+    <ul>
+      <li><b>Payment after offer:</b> a payment-related message appears after a selection or offer claim; adds 15 points.</li>
+      <li><b>Increasing urgency:</b> time pressure appears later after earlier messages without an urgency signal; adds 10 points.</li>
+      <li>Each message also receives its own evidence and risk band, so the timeline can show where signals occurred.</li>
+    </ul>
+    <h3>URL indicators</h3>
+    <table><thead><tr><th>Indicator</th><th>Weight</th></tr></thead><tbody>
+      <tr><td>HTTP rather than HTTPS</td><td>15</td></tr>
+      <tr><td>User information embedded before the host</td><td>25</td></tr>
+      <tr><td>Numeric IP address as host</td><td>15</td></tr>
+      <tr><td>Punycode host label</td><td>20</td></tr>
+      <tr><td>One of the selected uncommon suffixes (.zip, .mov, .top, .click, .work)</td><td>8</td></tr>
+    </tbody></table>
+    <p class="small">These are URL-shape observations, not reputation or safety checks. A legitimate site can use an IP, HTTP, or an uncommon suffix; any signal can be wrong.</p>
+    <h3>Score calculation</h3>
+    <p>For repeated evidence with the same code, the engine keeps the highest weight rather than repeatedly adding it. Distinct codes are summed, then capped at 100.</p>
+    <pre>score = min(100, sum(max weight for each distinct evidence code))
+Low: score &lt; 30    Medium: 30–59    High: score ≥ 60</pre>
+    <p>The bands are presentation categories for a heuristic estimate; they are not calibrated probabilities. The detector also avoids counting common denial phrases such as “no fee” as a fee request in the covered pattern.</p>
+    <h3>Analysis limits</h3>
+    <p>Messages and URLs are limited to 10,000 characters. A conversation accepts at most 20 non-empty ordered entries. Optional timestamps are descriptive metadata (up to 80 characters), not a source of external validation.</p>
+  </section>
+
+  <section class="page page-break">
+    <div class="eyebrow">06 · API and data</div>
+    <h2>Contract, errors, and privacy</h2>
+    <h3>Public endpoints</h3>
+    <table><thead><tr><th>Service</th><th>Route</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td>Java</td><td><code>GET /api/health</code></td><td>API health response.</td></tr>
+      <tr><td>Java</td><td><code>POST /api/analyze</code></td><td>Browser-facing JSON analysis endpoint.</td></tr>
+      <tr><td>Python</td><td><code>GET /health</code></td><td>Detector health response.</td></tr>
+      <tr><td>Python</td><td><code>POST /analyze</code></td><td>Internal detector endpoint called by Java.</td></tr>
+    </tbody></table>
+    <h3>Request modes</h3>
+    <pre>{ "mode": "single", "message": "..." }
+{ "mode": "conversation", "messages": [{ "text": "...", "timestamp": null }] }
+{ "mode": "url", "url": "https://example.org/path" }</pre>
+    <h3>Analysis response</h3>
+    <p>The JSON response contains <code>riskScore</code>, <code>riskLevel</code>, <code>summary</code>, <code>evidence</code>, <code>messageFindings</code>, <code>patterns</code>, <code>recommendations</code>, and <code>verificationChecklist</code>. Evidence uses zero-based message indexes; conversation-wide patterns can have a null index.</p>
+    <h3>Error behavior</h3>
+    <ul>
+      <li>Invalid request content returns HTTP 422 with a generic safe detail rather than echoing the submitted message or URL.</li>
+      <li>If Python is unreachable, Java maps the upstream failure to HTTP 503.</li>
+      <li>If the detector returns an invalid response shape, Java reports HTTP 502.</li>
+      <li>Browser-side validation gives immediate feedback for empty input, unsupported URL scheme, and size/message-count limits.</li>
+    </ul>
+    <h3>Privacy and trust boundaries</h3>
+    <ul>
+      <li>The normal analysis path is local browser → Java → Python. No external AI provider is configured.</li>
+      <li>The application has no database or persistence layer for analysis submissions. Checklist state is held in the browser UI.</li>
+      <li>The detector parses URL text only. It does not open or fetch a submitted address.</li>
+      <li>Submitted text should not be logged. It is untrusted input and must remain size-limited and validated at each service boundary.</li>
+      <li>Do not paste credentials, one-time codes, account numbers, or private information into a demo.</li>
+    </ul>
+    <div class="callout"><b>Important distinction:</b> privacy-first local processing does not mean a message is safe. A low score does not establish legitimacy, and checking every box does not prove a sender or offer is genuine.</div>
+  </section>
+
+  <section class="page page-break">
+    <div class="eyebrow">07 · Running and quality</div>
+    <h2>Setup and verification</h2>
+    <h3>Prerequisites</h3>
+    <ul><li>Python 3.11+ (Python 3.14.8 was used for the current local run).</li><li>Java 17.</li><li>Apache Maven 3.9+ (the current workspace has Maven 3.10.0 under <code>.tools</code>).</li><li>Node.js 20.19+ and npm (Node 24.21.0 was used for the current frontend build).</li></ul>
+    <h3>Start the three services on Windows</h3>
+    <p>Open three PowerShell terminals from the project folder.</p>
+    <pre># Terminal 1 — detector
+cd .\detection-service
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000</pre>
+    <pre># Terminal 2 — Java API
+cd .\backend
+$env:DETECTION_SERVICE_URL = 'http://127.0.0.1:8000'
+$env:FRONTEND_ORIGIN = 'http://localhost:5173'
+mvn "-Dmaven.repo.local=$env:TEMP\redflagradar-m2\repository" spring-boot:run</pre>
+    <pre># Terminal 3 — browser UI
+cd .\frontend
+npm install
+npm run dev -- --host localhost</pre>
+    <p>Open <b>http://localhost:5173</b>. For the current workspace, use the `.venv` interpreter explicitly if Windows’ <code>python</code> alias is unavailable, and invoke `.tools\apache-maven-3.10.0\bin\mvn.cmd` if Maven is not on PATH. Full steps are in the project README.</p>
+    <h3>Verified checks</h3>
+    <table><thead><tr><th>Area</th><th>Recorded result</th><th>Scope</th></tr></thead><tbody>
+      <tr><td>Python suite</td><td>20 tests passed</td><td>Detector rules, validation, FastAPI responses.</td></tr>
+      <tr><td>Java suite</td><td>7 tests passed</td><td>Controller behavior, CORS, request validation, Python service client.</td></tr>
+      <tr><td>Frontend build</td><td>Vite production build succeeded after the Next Move Coach was added</td><td>All frontend modules compile and bundle.</td></tr>
+      <tr><td>Browser flows</td><td>8 UI assertions passed before the Next Move Coach was added</td><td>Input validation, loading state, message/conversation/URL display, checklist behavior.</td></tr>
+    </tbody></table>
+    <p class="small">The new Next Move Coach was included in the successful frontend build. It was not part of the earlier eight browser assertions, so the report does not claim a separate automated end-to-end test for its copy behavior.</p>
+    <h3>Representative synthetic examples</h3>
+    <table><thead><tr><th>Mode</th><th>Sample result</th><th>Interpretation</th></tr></thead><tbody>
+      <tr><td>Message about internship fee</td><td>37 / 100 · Medium</td><td>Payment and time pressure indicators in the supplied wording.</td></tr>
+      <tr><td>Offer followed by fee and cancellation pressure</td><td>74 / 100 · High</td><td>Multiple distinct indicators plus chronology patterns.</td></tr>
+      <tr><td>Plain-HTTP numeric-IP URL</td><td>30 / 100 · Medium</td><td>Two URL-shape indicators; the destination was never visited.</td></tr>
+    </tbody></table>
+    <p class="small">These scores are tied to the included fabricated examples. They are not an accuracy benchmark or a claim that the detector identifies all scams.</p>
+  </section>
+
+  <section class="page page-break">
+    <div class="eyebrow">08 · Honest scope and roadmap</div>
+    <h2>Limitations and future work</h2>
+    <h3>What the current prototype cannot establish</h3>
+    <ul>
+      <li>Whether the sender controls a real address, phone number, account, or domain.</li>
+      <li>Whether a company, scholarship, job opening, or payment policy is real or current.</li>
+      <li>Whether a URL has malicious reputation or is safe to open.</li>
+      <li>Whether a message is fraudulent merely because one phrase matches a rule.</li>
+      <li>That a low score or completed checklist means the user is safe.</li>
+    </ul>
+    <h3>Known technical constraints</h3>
+    <ul>
+      <li>Phrase rules are narrow and primarily English-language; paraphrases, slang, and other languages may be missed.</li>
+      <li>Legitimate messages can contain payment or deadline language, creating false positives.</li>
+      <li>The score weights are hand-authored and not calibrated against a representative, independently labeled dataset.</li>
+      <li>There is no authentication, rate limiting, deployment hardening, audit pipeline, or production observability in the local prototype.</li>
+      <li>The Next Move Coach uses evidence codes and fixed templates; it is not a conversational AI assistant.</li>
+    </ul>
+    <h3>Recommended roadmap</h3>
+    <ol>
+      <li><b>Evaluate responsibly:</b> create a consented, privacy-safe benchmark; report precision/recall and false-positive examples by scenario and language.</li>
+      <li><b>Broaden language coverage:</b> add reviewed multilingual and paraphrase rules, with language-aware UI and tests.</li>
+      <li><b>Improve evidence mapping:</b> connect each signal to an independent source type and explain what claim to verify there.</li>
+      <li><b>Automate browser checks:</b> include the coach’s text variants, clipboard success/failure, accessibility, responsive layout, and service errors in CI.</li>
+      <li><b>Harden before deployment:</b> define allowed origins, request limits, abuse protection, timeouts, logging policy, secret management, and retention rules.</li>
+      <li><b>Keep claims honest:</b> if external reputation data or machine learning is introduced, disclose sources, coverage, freshness, and failure modes.</li>
+    </ol>
+    <h3>Project structure</h3>
+    <pre>frontend/          React and Vite interface
+backend/           Spring Boot API and Python client
+detection-service/ FastAPI routes, rules, scoring engine
+tests/             Python unit and API tests
+docs/              Architecture, API contract, demo material, screenshots, report</pre>
+    <h3>Short presentation pitch</h3>
+    <div class="callout">“Red Flag Radar helps people pause before paying or sharing sensitive information. It shows the wording and conversation patterns that raised concern, then offers independent checks and a practical next move. It reviews URL text without opening links. The score is a transparent heuristic—not proof of fraud or safety.”</div>
+    <p class="footnote">Prepared from the current local project implementation. Technology versions, test counts, and feature status describe this workspace as of 12 October 2026. See README.md and the docs folder for runnable setup steps, API examples, screenshots, and the demo script.</p>
+  </section>
+</body>
+</html>

@@ -1,0 +1,17 @@
+﻿{
+    "mode":  "conversation",
+    "messages":  [
+                     {
+                         "text":  "Congratulations! You have been selected for an internship.",
+                         "timestamp":  null
+                     },
+                     {
+                         "text":  "Please pay a registration fee today to reserve your place.",
+                         "timestamp":  null
+                     },
+                     {
+                         "text":  "Pay immediately or your offer will be cancelled.",
+                         "timestamp":  null
+                     }
+                 ]
+}

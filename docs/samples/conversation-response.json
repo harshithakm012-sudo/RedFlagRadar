@@ -1,0 +1,151 @@
+﻿{
+    "riskScore":  74,
+    "riskLevel":  "High",
+    "summary":  "Several warning signs were found. Pause and verify the claims through independently located channels.",
+    "evidence":  [
+                     {
+                         "code":  "payment_request",
+                         "messageIndex":  1,
+                         "text":  "The message mentions a payment, fee, or money transfer. Check whether it is unexpected and independently documented.",
+                         "explanation":  "The message mentions a payment, fee, or money transfer. Check whether it is unexpected and independently documented."
+                     },
+                     {
+                         "code":  "urgency",
+                         "messageIndex":  1,
+                         "text":  "The message uses time pressure. Verify the deadline through an independently found official channel.",
+                         "explanation":  "The message uses time pressure. Verify the deadline through an independently found official channel."
+                     },
+                     {
+                         "code":  "payment_request",
+                         "messageIndex":  2,
+                         "text":  "The message mentions a payment, fee, or money transfer. Check whether it is unexpected and independently documented.",
+                         "explanation":  "The message mentions a payment, fee, or money transfer. Check whether it is unexpected and independently documented."
+                     },
+                     {
+                         "code":  "urgency",
+                         "messageIndex":  2,
+                         "text":  "The message uses time pressure. Verify the deadline through an independently found official channel.",
+                         "explanation":  "The message uses time pressure. Verify the deadline through an independently found official channel."
+                     },
+                     {
+                         "code":  "pressure_or_threat",
+                         "messageIndex":  2,
+                         "text":  "The message threatens a negative consequence. Pressure can make it harder to check a claim carefully.",
+                         "explanation":  "The message threatens a negative consequence. Pressure can make it harder to check a claim carefully."
+                     },
+                     {
+                         "code":  "payment_after_offer",
+                         "messageIndex":  null,
+                         "text":  "A payment request follows an offer or selection claim.",
+                         "explanation":  "The sequence is a warning sign to check, but does not by itself establish fraud."
+                     },
+                     {
+                         "code":  "increasing_urgency",
+                         "messageIndex":  null,
+                         "text":  "Time pressure appears later in the conversation.",
+                         "explanation":  "Later time pressure can compound earlier warning signs; consider the full context."
+                     }
+                 ],
+    "messageFindings":  [
+                            {
+                                "messageIndex":  0,
+                                "riskScore":  0,
+                                "riskLevel":  "Low",
+                                "evidence":  [
+
+                                             ]
+                            },
+                            {
+                                "messageIndex":  1,
+                                "riskScore":  37,
+                                "riskLevel":  "Medium",
+                                "evidence":  [
+                                                 {
+                                                     "code":  "payment_request",
+                                                     "messageIndex":  1,
+                                                     "text":  "The message mentions a payment, fee, or money transfer. Check whether it is unexpected and independently documented.",
+                                                     "explanation":  "The message mentions a payment, fee, or money transfer. Check whether it is unexpected and independently documented."
+                                                 },
+                                                 {
+                                                     "code":  "urgency",
+                                                     "messageIndex":  1,
+                                                     "text":  "The message uses time pressure. Verify the deadline through an independently found official channel.",
+                                                     "explanation":  "The message uses time pressure. Verify the deadline through an independently found official channel."
+                                                 }
+                                             ]
+                            },
+                            {
+                                "messageIndex":  2,
+                                "riskScore":  49,
+                                "riskLevel":  "Medium",
+                                "evidence":  [
+                                                 {
+                                                     "code":  "payment_request",
+                                                     "messageIndex":  2,
+                                                     "text":  "The message mentions a payment, fee, or money transfer. Check whether it is unexpected and independently documented.",
+                                                     "explanation":  "The message mentions a payment, fee, or money transfer. Check whether it is unexpected and independently documented."
+                                                 },
+                                                 {
+                                                     "code":  "urgency",
+                                                     "messageIndex":  2,
+                                                     "text":  "The message uses time pressure. Verify the deadline through an independently found official channel.",
+                                                     "explanation":  "The message uses time pressure. Verify the deadline through an independently found official channel."
+                                                 },
+                                                 {
+                                                     "code":  "pressure_or_threat",
+                                                     "messageIndex":  2,
+                                                     "text":  "The message threatens a negative consequence. Pressure can make it harder to check a claim carefully.",
+                                                     "explanation":  "The message threatens a negative consequence. Pressure can make it harder to check a claim carefully."
+                                                 }
+                                             ]
+                            }
+                        ],
+    "patterns":  [
+                     {
+                         "code":  "payment_after_offer",
+                         "message":  "A payment request follows an offer or selection claim."
+                     },
+                     {
+                         "code":  "increasing_urgency",
+                         "message":  "Time pressure appears later in the conversation."
+                     }
+                 ],
+    "recommendations":  [
+                            "Pause before paying any unexpected fee; confirm it through an independently found official channel.",
+                            "Do not share passwords or one-time codes.",
+                            "Verify claims using contact details you find independently.",
+                            "Completing a checklist does not establish that an offer is genuine, and a low score does not prove a message is safe."
+                        ],
+    "verificationChecklist":  [
+                                  {
+                                      "id":  "independent_source",
+                                      "title":  "Find the organization\u0027s official website independently",
+                                      "why":  "A link or contact supplied in a suspicious message may lead to an impersonator.",
+                                      "completed":  false
+                                  },
+                                  {
+                                      "id":  "official_opening",
+                                      "title":  "Check the offer on an official careers, program, or announcements page",
+                                      "why":  "An independently located official listing can help confirm the claim.",
+                                      "completed":  false
+                                  },
+                                  {
+                                      "id":  "sender_domain",
+                                      "title":  "Compare the sender\u0027s address with the organization\u0027s official domain",
+                                      "why":  "Lookalike or unrelated domains can indicate impersonation; matching domains alone are not proof.",
+                                      "completed":  false
+                                  },
+                                  {
+                                      "id":  "payment_request",
+                                      "title":  "Investigate any unexpected fee or payment request before paying",
+                                      "why":  "Upfront fees deserve careful checking through official channels.",
+                                      "completed":  false
+                                  },
+                                  {
+                                      "id":  "sensitive_data",
+                                      "title":  "Do not provide passwords, one-time codes, or unnecessary financial details",
+                                      "why":  "Legitimate organizations should not need your password or OTP.",
+                                      "completed":  false
+                                  }
+                              ]
+}

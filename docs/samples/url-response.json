@@ -1,0 +1,61 @@
+﻿{
+    "riskScore":  30,
+    "riskLevel":  "Medium",
+    "summary":  "Some warning signs were found. Review the evidence and verify important claims independently.",
+    "evidence":  [
+                     {
+                         "code":  "unencrypted_http",
+                         "messageIndex":  null,
+                         "text":  "The URL uses HTTP rather than HTTPS. This does not establish whether the site is malicious.",
+                         "explanation":  "The URL uses HTTP rather than HTTPS. This does not establish whether the site is malicious."
+                     },
+                     {
+                         "code":  "ip_host",
+                         "messageIndex":  null,
+                         "text":  "The URL uses a numeric IP address as its host. Check the destination carefully.",
+                         "explanation":  "The URL uses a numeric IP address as its host. Check the destination carefully."
+                     }
+                 ],
+    "messageFindings":  [
+
+                        ],
+    "patterns":  [
+
+                 ],
+    "recommendations":  [
+                            "This analyzer did not visit the URL. Do not open it unless you trust the source.",
+                            "Navigate to an organization\u0027s website by typing an independently found address."
+                        ],
+    "verificationChecklist":  [
+                                  {
+                                      "id":  "independent_source",
+                                      "title":  "Find the organization\u0027s official website independently",
+                                      "why":  "A link or contact supplied in a suspicious message may lead to an impersonator.",
+                                      "completed":  false
+                                  },
+                                  {
+                                      "id":  "official_opening",
+                                      "title":  "Check the offer on an official careers, program, or announcements page",
+                                      "why":  "An independently located official listing can help confirm the claim.",
+                                      "completed":  false
+                                  },
+                                  {
+                                      "id":  "sender_domain",
+                                      "title":  "Compare the sender\u0027s address with the organization\u0027s official domain",
+                                      "why":  "Lookalike or unrelated domains can indicate impersonation; matching domains alone are not proof.",
+                                      "completed":  false
+                                  },
+                                  {
+                                      "id":  "payment_request",
+                                      "title":  "Investigate any unexpected fee or payment request before paying",
+                                      "why":  "Upfront fees deserve careful checking through official channels.",
+                                      "completed":  false
+                                  },
+                                  {
+                                      "id":  "sensitive_data",
+                                      "title":  "Do not provide passwords, one-time codes, or unnecessary financial details",
+                                      "why":  "Legitimate organizations should not need your password or OTP.",
+                                      "completed":  false
+                                  }
+                              ]
+}
