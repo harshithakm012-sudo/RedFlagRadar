@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Red Flag Radar
 
 **Spot the Signs. Stop the Scams.**
@@ -102,3 +103,7 @@ Screenshots live in [docs/screenshots](docs/screenshots). Sample requests and li
 ## Scope and limitations
 
 The service applies transparent, rule-based heuristics. It does not authenticate a sender, check a real company or job listing, crawl a URL, or determine whether a message is definitively fraudulent. A low score is not a safety guarantee. Checklist completion is local UI progress and is not sent as proof of legitimacy. Avoid pasting passwords, one-time codes, or payment credentials.
+=======
+# RedFlagRadar
+A web app that analyzes suspicious messages and links, explains potential scam warning signs, and suggests safer next steps.
+>>>>>>> 2f9e451e863134200ffa2fa208241e6a683df638
